@@ -1,0 +1,15 @@
+<script>
+  const items = document.querySelectorAll("item");
+  const itemData = Array.from(items).map(item => item.textContent.trim());
+
+  fetch("http://127.0.0.1:8001/ipc", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ items: itemData }),
+  })
+  .then(res => res.json())
+  .then(data => console.log("Sent to helper.py:", data))
+  .catch(err => console.error("IPC send error:", err));
+</script>
